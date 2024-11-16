@@ -19,7 +19,7 @@ function stmartin_wof_init() {
     $plugin_rel_path = basename( dirname( __FILE__ ) ) . '/languages'; /* Relative to WP_PLUGIN_DIR */
     load_plugin_textdomain( 'stmartin-wof', false, $plugin_rel_path );
 }
-add_action('plugins_loaded', 'stmartin_wof_init');
+add_action('init', 'stmartin_wof_init', 1);
 
 // $plugin = new Plugin();
 // $plugin->register();

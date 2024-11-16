@@ -45,18 +45,18 @@ class Plugin
          * On diffère l'exécution afin de s'assurer que toutes les
          * traductions, post types, taxonomies, etc., sont correctement
          * initialisés après le chargement du coeur de WordPress.
-         * Avec le hook 'init' c'est trop tard semble-t-il car le CustomPostType n'apparaît pas.
-         * Comme le chargement des langues est sur le hook 'plugins_loaded' en priorité 10 on met 20 pour que ça arrive après.
+         * Comme le chargement des langues est sur le hook 'init' en priorité 1 on met 5 pour que ça arrive après.
+         * Mais on met tout cela avant la priorité 10 sinon le CustomPostType n'apparaît pas dans le menu admin
          */
-        add_action('plugins_loaded', [$this, 'registerAllCustomPostTypes'], 20);
-        add_action('plugins_loaded', [$this, 'registerAllPostTypeCustomMetaboxes'], 20);
+        add_action('init', [$this, 'registerAllCustomPostTypes'], 5);
+        add_action('init', [$this, 'registerAllPostTypeCustomMetaboxes'], 5);
 
-        add_action('plugins_loaded', [$this, 'registerAllCustomTaxonomies'], 20);
-        add_action('plugins_loaded', [$this, 'registerAllTaxonomyCustomMetadatas'], 20);
+        add_action('init', [$this, 'registerAllCustomTaxonomies'], 5);
+        add_action('init', [$this, 'registerAllTaxonomyCustomMetadatas'], 5);
 
-        add_action('plugins_loaded', [$this, 'registerAllCustomRoles'], 20);
+        add_action('init', [$this, 'registerAllCustomRoles'], 5);
 
-        add_action('plugins_loaded', [$this, 'registerAllUserMetadatas'], 20);
+        add_action('init', [$this, 'registerAllUserMetadatas'], 5);
 
 
        /* $this->registerAllCustomPostTypes();
